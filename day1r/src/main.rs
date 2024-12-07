@@ -7,6 +7,8 @@ fn main() {
     // Then, add up all the distances
     let args: Vec<String> = env::args().collect();
     let n = args.len();
+    // What does :? do?
+    // It prints the debug representation of the object
     println!("args: {:?}", args);
     let filename = &args[n - 1];
     println!("Reading from file: {}", filename);
@@ -16,14 +18,20 @@ fn main() {
     let mut right_numbers = Vec::new();
 
     for line in contents.lines() {
+        //? Line is a string
         let nums: Vec<&str> = line.split_whitespace().collect();
         if nums.len() == 2 {
+            // Why do we use Ok?
+            // Because parse() returns a Result type
             if let (Ok(left), Ok(right)) = (nums[0].parse::<i32>(), nums[1].parse::<i32>()) {
                 left_numbers.push(left);
                 right_numbers.push(right);
             }
         }
     }
+
+    // What does | signify? It's a closure
+    // sort_by takes the trait FnMut which is a closure that mutates the values
     left_numbers.sort_by(|a, b| b.cmp(a));
     right_numbers.sort_by(|a, b| b.cmp(a));
 
