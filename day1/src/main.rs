@@ -35,4 +35,18 @@ fn main() {
         total_distance += (left_numbers[i] - right_numbers[i]).abs();
     }
     println!("Total distance: {}", total_distance);
+
+    // Part 2: Calculate a total similarity score by adding up each number in the 
+    // left list after multiplying it by the number of times that number appears in the right list.
+    let mut total_similarity = 0;
+    for i in 0..left_numbers.len() {
+        let mut count = 0;
+        for j in 0..right_numbers.len() {
+            if left_numbers[i] == right_numbers[j] {
+                count += 1;
+            }
+        }
+        total_similarity += left_numbers[i] * count;
+    }
+    println!("Total similarity: {}", total_similarity);
 }
